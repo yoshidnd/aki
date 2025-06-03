@@ -207,10 +207,18 @@
 
 
   <!-- About -->
-  <section class="max-w-3xl mx-auto px-4 py-10" data-aos="fade-up">
-    <h2 class="text-3xl font-semibold text-sky-500 mb-4">About Me</h2>
-    <p class="text-lg">I'm a frontend and backend developer who loves building beautiful, animated websites that bring ideas to life. I specialize in HTML, CSS, JavaScript, and Laravel.</p>
-  </section>
+<section class="max-w-3xl mx-auto px-4 py-10" data-aos="fade-up">
+  <h2 class="text-3xl font-semibold text-sky-500 mb-4">About Me</h2>
+  <p class="text-lg">
+    I'm a frontend and backend developer who loves building beautiful, animated websites that bring ideas to life. I specialize in HTML, CSS, JavaScript, and Laravel.
+  </p>
+
+  <button id="surpriseBtn" class="mt-6 px-5 py-2 bg-purple-500 text-white rounded hover:bg-purple-600 transition">
+    Click here for a surprise. Wait mo after mo click hehe mwa 💌
+  </button>
+
+  <div id="surpriseContainer" class="hidden mt-6 text-purple-500 font-semibold text-center space-y-3 text-xl"></div>
+</section>
 
   <!-- Skills -->
   <section class="max-w-4xl mx-auto px-4 py-10" data-aos="fade-right">
@@ -244,33 +252,33 @@
   </section>
 
 <section class="max-w-4xl mx-auto px-4 py-10" data-aos="fade-left">
-  <h2 class="text-3xl font-semibold text-sky-500 mb-6">Surprises from your Aki 💖</h2>
+  <h2 class="text-3xl font-semibold text-purple-500 mb-6">Surprises from your Aki 💖</h2>
   <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
     
     <!-- Surprise 1: Secret Compliment -->
     <div class="bg-white p-6 rounded-xl shadow-lg cursor-pointer" onclick="openModal('modalCompliment')">
-      <i class="fas fa-heart text-2xl text-sky-600 mb-2"></i>
+      <i class="fas fa-heart text-2xl text-purple-600 mb-2"></i>
       <h3 class="text-lg font-semibold mb-1">Secret Compliment</h3>
       <p class="text-sm">Click here for a special message just for you.</p>
     </div>
 
     <!-- Surprise 2: Mini Love Quiz -->
     <div class="bg-white p-6 rounded-xl shadow-lg cursor-pointer" onclick="openModal('modalQuiz')">
-      <i class="fas fa-question-circle text-2xl text-sky-600 mb-2"></i>
+      <i class="fas fa-question-circle text-2xl text-purple-600 mb-2"></i>
       <h3 class="text-lg font-semibold mb-1">Mini Love Quiz</h3>
       <p class="text-sm">Test how well you know us! Click to start.</p>
     </div>
 
     <!-- Surprise 3: Random Memory -->
     <div class="bg-white p-6 rounded-xl shadow-lg cursor-pointer" onclick="openModal('modalMemory')">
-      <i class="fas fa-camera-retro text-2xl text-sky-600 mb-2"></i>
+      <i class="fas fa-camera-retro text-2xl text-purple-600 mb-2"></i>
       <h3 class="text-lg font-semibold mb-1">Random Memory</h3>
       <p class="text-sm">Click to see a favorite photo and moment together.</p>
     </div>
 
     <!-- Surprise 4: Play Our Song -->
     <div class="bg-white p-6 rounded-xl shadow-lg cursor-pointer" onclick="openModal('modalSong')">
-      <i class="fas fa-music text-2xl text-sky-600 mb-2"></i>
+      <i class="fas fa-music text-2xl text-purple-600 mb-2"></i>
       <h3 class="text-lg font-semibold mb-1">Play Our Song</h3>
       <p class="text-sm">Click to hear the song that makes me think of you.</p>
     </div>
@@ -365,8 +373,8 @@
     </div>
   </section>
 
-  <footer class="text-center text-sm py-6 text-sky-700">
-    © 2025 Created by your pretty girl, Sofia. All rights reserved.
+  <footer class="text-center text-sm py-6 text-purple-700">
+    © 2025 Created by your pretty girl, Sofia. Only you reserved.
   </footer>
 
 
@@ -463,6 +471,53 @@
     });
   });
 
+    document.addEventListener('DOMContentLoaded', () => {
+    const btn = document.getElementById('surpriseBtn');
+    const container = document.getElementById('surpriseContainer');
+    const messages = [
+      "Every time I look into your eyes I see it",
+      "You're all I need",
+      "Every time I get a bit inside I feel it",
+      "Ooh, who would've thought I'd get you?",
+      "Oh yeah, oh yeah babe",
+      "Ooh, who would've thought I'd get you?", 
+
+      "- Get You; a song that I dedicated for you. I love you! -",
+
+    ];
+
+    let showing = false;
+
+    btn.addEventListener('click', () => {
+      if (!showing) {
+        container.innerHTML = "";
+        container.classList.remove('hidden');
+        btn.textContent = "Hide surprise 💌";
+        let i = 0;
+
+        const interval = setInterval(() => {
+          if (i < messages.length) {
+            const msg = document.createElement('p');
+            msg.textContent = messages[i];
+            msg.style.opacity = 0;
+            msg.style.transition = 'opacity 0.5s ease-in-out';
+            container.appendChild(msg);
+            setTimeout(() => {
+              msg.style.opacity = 1;
+            }, 50);
+            i++;
+          } else {
+            clearInterval(interval);
+          }
+        }, 1500);
+      } else {
+        container.classList.add('hidden');
+        container.innerHTML = "";
+        btn.textContent = "Click here for a surprise 💌";
+      }
+      showing = !showing;
+    });
+  });
     
   </script>
 </body>
