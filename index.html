@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Aki's Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <style>
+    body {
+      background: linear-gradient(to bottom right, #dff6ff, #b2ebf2);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* Floating Hearts */
+    .heart {
+      position: fixed;
+      width: 24px;
+      height: 24px;
+      background: red;
+      transform: rotate(45deg);
+      opacity: 0.8;
+      z-index: 50;
+      animation: floatUp 3s linear forwards;
+    }
+
+    .heart::before, .heart::after {
+      content: '';
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      background: red;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -12px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: -12px;
+      top: 0;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) rotate(45deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-200px) rotate(45deg);
+        opacity: 0;
+      }
+    }
+
+    /* Heart Beat Animation on Button */
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.3); }
+    }
+
+    button#heartBtn {
+      animation: heartbeat 2s infinite;
+      transform-origin: center;
+    }
+
+    /* Surprise Message */
+    #surpriseMessage {
+      display: none;
+      animation: fadeIn 1s forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .confetti.heart {
+      position: fixed;
+      pointer-events: none;
+      user-select: none;
+      animation: confetti-fall 4s ease forwards;
+      font-weight: bold;
+      /* Hearts use text instead of background color */
+      color: inherit;
+      text-shadow: 0 0 3px rgba(0,0,0,0.3);
+    }
+
+    @keyframes confetti-fall {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+
+    /* Handwritten Love Note */
+    #loveNote {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #fff0f6;
+      border: 3px dashed #955596;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(244, 63, 214, 0.6);
+      font-family: 'Satisfy', cursive;
+      font-size: 1.5rem;
+      color: #d6336c;
+      z-index: 60;
+      max-width: 90vw;
+      max-height: 70vh;
+      overflow-y: auto;
+      white-space: pre-wrap;
+    }
+    
+    .modal {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+  }
+  .modal-content {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    position: relative;
+    max-width: 90%;
+    box-shadow: 0 0 30px #a11f87;
+  }
+  .close-btn {
+    position: absolute;
+    top: 10px; right: 15px;
+    font-size: 28px;
+    font-weight: bold;
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: #8f03a1;
+  }
+
+  </style>
+</head>
+<body class="text-gray-800">
+
+
+  <!-- Surprise Heart Button -->
+  <button id="heartBtn" onclick="surpriseMe()" class="fixed top-4 right-4 z-50 text-red-500 text-3xl hover:scale-125 transition-transform duration-300">
+    <i class="fas fa-heart"></i>
+  </button>
+
+
+  <!-- Surprise Message -->
+  <div id="surpriseMessage" class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white shadow-lg p-6 rounded-xl text-center z-40">
+    <h2 class="text-2xl text-pink-500 font-bold">I Love You, Aki 💖</h2>
+    <p class="text-sm mt-2 text-gray-600">Forever yours, Sofia 💕</p>
+  </div>
+
+  <!-- Handwritten Love Note -->
+  <div id="loveNote">
+    Hi Aki 💕,<br/>
+    Just wanted to remind you how much you mean to me every single day.
+    You are my sunshine, my love, my everything.<br/>
+
+    Thank you for everything you’ve done for me — for all that you’ve given and taught me. <br>
+    I’m sorry if I’ve made mistakes or done things that upset you. <br>
+    I really appreciate that you’re still here, even though you might be getting tired of me sometimes. Sorry if I’ve caused you stress or headaches.
+    I hope we can finish what we started together and not part ways, so we can begin our real life side by side. <br>
+    There’s so much more I want to say, but I’ll save some surprises for next time — if I think of any more silly things to share hahahaha. <br>
+    Can’t wait to see you again and make more memories together!<br/>
+
+    I love you so much — Aki, babe, baby, my love! You’ve brought out my cheesy lover girl side again, so please bear with my corny moments. <br>
+    Take care always, and remember I’m always here for you, my baby! ❤️ <br>
+    Love always,<br/>
+    Sofia ❤️
+  </div>
+
+  
+
+  <!-- Header -->
+  <header class="text-center py-10" data-aos="fade-down">
+    <div class="flex justify-center mb-6">
+      <img src="pilo.jpg" alt="Profile Picture" class="w-48 h-48 rounded-full border-4 border-sky-400 shadow-md object-cover">
+    </div>
+    <h1 class="text-5xl font-bold text-sky-600">Jhales</h1>
+    <p class="text-xl mt-3">Web Developer | Critical Thinker | Sofia's Aki</p>
+  </header>
+
+  <!-- About -->
+  <section class="max-w-3xl mx-auto px-4 py-10" data-aos="fade-up">
+    <h2 class="text-3xl font-semibold text-sky-500 mb-4">About Me</h2>
+    <p class="text-lg">I'm a frontend and backend developer who loves building beautiful, animated websites that bring ideas to life. I specialize in HTML, CSS, JavaScript, and Laravel.</p>
+  </section>
+
+  <!-- Skills -->
+  <section class="max-w-4xl mx-auto px-4 py-10" data-aos="fade-right">
+    <h2 class="text-3xl font-semibold text-sky-500 mb-6">Skills</h2>
+    <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 text-center">
+      <div class="bg-white p-4 rounded-lg shadow-md">
+        <i class="fab fa-html5 text-3xl text-orange-600 mb-2"></i>
+        <p class="text-sm font-medium">HTML5</p>
+      </div>
+      <div class="bg-white p-4 rounded-lg shadow-md">
+        <i class="fab fa-css3-alt text-3xl text-blue-500 mb-2"></i>
+        <p class="text-sm font-medium">CSS3</p>
+      </div>
+      <div class="bg-white p-4 rounded-lg shadow-md">
+        <i class="fab fa-js-square text-3xl text-yellow-500 mb-2"></i>
+        <p class="text-sm font-medium">JavaScript</p>
+      </div>
+      <div class="bg-white p-4 rounded-lg shadow-md">
+        <i class="fa-brands fa-laravel text-3xl text-red-500 mb-2"></i>
+        <p class="text-sm font-medium">Laravel</p>
+      </div>
+      <div class="bg-white p-4 rounded-lg shadow-md">
+        <i class="fab fa-node-js text-3xl text-green-500 mb-2"></i>
+        <p class="text-sm font-medium">Node.js</p>
+      </div>
+      <div class="bg-white p-4 rounded-lg shadow-md">
+        <i class="fas fa-database text-3xl text-indigo-500 mb-2"></i>
+        <p class="text-sm font-medium">MySQL</p>
+      </div>
+    </div>
+  </section>
+
+<section class="max-w-4xl mx-auto px-4 py-10" data-aos="fade-left">
+  <h2 class="text-3xl font-semibold text-sky-500 mb-6">Surprises from your Aki 💖</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+    
+    <!-- Surprise 1: Secret Compliment -->
+    <div class="bg-white p-6 rounded-xl shadow-lg cursor-pointer" onclick="openModal('modalCompliment')">
+      <i class="fas fa-heart text-2xl text-sky-600 mb-2"></i>
+      <h3 class="text-lg font-semibold mb-1">Secret Compliment</h3>
+      <p class="text-sm">Click here for a special message just for you.</p>
+    </div>
+
+    <!-- Surprise 2: Mini Love Quiz -->
+    <div class="bg-white p-6 rounded-xl shadow-lg cursor-pointer" onclick="openModal('modalQuiz')">
+      <i class="fas fa-question-circle text-2xl text-sky-600 mb-2"></i>
+      <h3 class="text-lg font-semibold mb-1">Mini Love Quiz</h3>
+      <p class="text-sm">Test how well you know us! Click to start.</p>
+    </div>
+
+    <!-- Surprise 3: Random Memory -->
+    <div class="bg-white p-6 rounded-xl shadow-lg cursor-pointer" onclick="openModal('modalMemory')">
+      <i class="fas fa-camera-retro text-2xl text-sky-600 mb-2"></i>
+      <h3 class="text-lg font-semibold mb-1">Random Memory</h3>
+      <p class="text-sm">Click to see a favorite photo and moment together.</p>
+    </div>
+
+    <!-- Surprise 4: Play Our Song -->
+    <div class="bg-white p-6 rounded-xl shadow-lg cursor-pointer" onclick="openModal('modalSong')">
+      <i class="fas fa-music text-2xl text-sky-600 mb-2"></i>
+      <h3 class="text-lg font-semibold mb-1">Play Our Song</h3>
+      <p class="text-sm">Click to hear the song that makes me think of you.</p>
+    </div>
+  </div>
+
+  <!-- Modal Template -->
+  <div id="modalCompliment" class="modal hidden">
+    <div class="modal-content">
+      <button class="close-btn" onclick="closeModal('modalCompliment')">×</button>
+      <h3 class="text-2xl font-semibold mb-4 text-purple-600">💖 Secret Compliment 💖</h3>
+      <p class="text-lg">You are so pogiiii!! 😘</p>
+    </div>
+  </div>
+
+  <div id="modalQuiz" class="modal hidden">
+    <div class="modal-content">
+      <button class="close-btn" onclick="closeModal('modalQuiz')">×</button>
+      <h3 class="text-2xl font-semibold mb-4 text-purple-600">💌 Mini Love Quiz 💌</h3>
+      <p class="text-lg mb-4">What's my favorite food? Hint: There's no wrong answer. 😘</p>
+      <input type="text" id="quizAnswer" placeholder="Type your answer here" class="p-2 border rounded w-full mb-4" />
+      <button onclick="checkQuizAnswer()" class="bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600">Submit</button>
+      <p id="quizResult" class="mt-4 font-semibold"></p>
+    </div>
+  </div>
+
+  <div id="modalMemory" class="modal hidden">
+    <div class="modal-content max-w-md text-center">
+      <button class="close-btn" onclick="closeModal('modalMemory')">×</button>
+      <img id="memoryImg" src="" alt="Memory" class="mx-auto rounded-md mb-4 max-h-64 object-cover" />
+      <p id="memoryText" class="text-gray-900 font-semibold text-lg"></p>
+      <button onclick="showRandomMemory()" class="mt-4 bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600">Show Another Memory</button>
+    </div>
+  </div>
+
+  <div id="modalSong" class="modal hidden">
+    <div class="modal-content text-center">
+      <button class="close-btn" onclick="closeModal('modalSong')">×</button>
+      <h3 class="text-2xl font-semibold mb-4 text-purple-600">🎵 Our Song 🎵</h3>
+      <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/2K0CH6BtfBtY7wMnsKIuzo?utm_source=generator" width="100%" height="152" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    </div>
+  </div>
+</section>
+
+  <!-- Projects -->
+  <section class="max-w-5xl mx-auto px-4 py-10" data-aos="zoom-in-up">
+    <h2 class="text-3xl font-semibold text-sky-500 mb-6">Projects</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      <div class="bg-white p-6 rounded-xl shadow-lg flex flex-col justify-between" data-aos="fade-right">
+        <div>
+          <h3 class="text-xl font-bold text-sky-600">JeylsGame</h3>
+          <p class="mb-4">A cool and fun game website that you can enjoy.</p>
+        </div>
+        <a href="https://jeylsgame.vercel.app/" target="_blank" class="mt-auto inline-block bg-sky-500 text-white px-4 py-2 rounded-lg hover:bg-sky-600 transition duration-300">
+          View Project
+        </a>
+      </div>
+
+      <div class="bg-white p-6 rounded-xl shadow-lg flex flex-col justify-between" data-aos="fade-left">
+        <div>
+          <h3 class="text-xl font-bold text-sky-600">Aki's Profile</h3>
+          <p class="mb-4">Website for my girl.</p>
+        </div>
+        <a href="https://aki21.vercel.app/" target="_blank" class="mt-auto inline-block bg-sky-500 text-white px-4 py-2 rounded-lg hover:bg-sky-600 transition duration-300">
+          View Project
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Music -->
+  <section class="max-w-4xl mx-auto px-4 py-10" data-aos="fade-up">
+    <h2 class="text-3xl font-semibold text-sky-500 mb-6">Music</h2>
+    <div class="bg-white rounded-xl shadow-lg p-6">
+      <h3 class="text-xl font-semibold text-sky-600 mb-4">Now Playing</h3>
+      <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/5hGgb2zpLsCqopGtUkA7BC?utm_source=generator" width="100%" height="152" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="max-w-xl mx-auto px-4 py-10" data-aos="fade-up">
+    <h2 class="text-3xl font-semibold text-sky-500 mb-6 text-center">Contact Me</h2>
+    <div class="flex justify-center gap-6 text-sky-600 text-3xl">
+      <a href="https://www.facebook.com/jhales016" target="_blank" class="hover:text-sky-800 transition">
+        <i class="fab fa-facebook-square"></i>
+      </a>
+      <a href="https://www.instagram.com/wkadflzmxhs/" target="_blank" class="hover:text-pink-500 transition">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="https://github.com/SantiagoJhalesArlick" target="_blank" class="hover:text-gray-800 transition">
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+  </section>
+
+  <footer class="text-center text-sm py-6 text-sky-700">
+    © 2025 Created by your pretty girl, Sofia. All rights reserved.
+  </footer>
+
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init();
+
+   let surpriseVisible = false;
+
+  function surpriseMe() {
+    const message = document.getElementById('surpriseMessage');
+    const note = document.getElementById('loveNote');
+
+    if (!surpriseVisible) {
+      // Show message and love note
+      message.style.display = 'block';
+      note.style.display = 'block';
+      surpriseVisible = true;
+
+      // Show confetti hearts
+      for (let i = 0; i < 15; i++) {
+        createConfettiHeart();
+      }
+    } else {
+      // Hide message and love note
+      message.style.display = 'none';
+      note.style.display = 'none';
+      surpriseVisible = false;
+    }
+  }
+
+  function createConfettiHeart() {
+    const heart = document.createElement('div');
+    heart.classList.add('confetti', 'heart');
+    heart.textContent = '❤️';
+    heart.style.left = `${Math.random() * 100}vw`;
+    heart.style.top = `-${Math.random() * 20 + 10}px`;
+    heart.style.fontSize = `${Math.random() * 24 + 12}px`;
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+      heart.remove();
+    }, 4000);
+  }
+
+  function openModal(id) {
+    document.getElementById(id).classList.remove('hidden');
+  }
+  function closeModal(id) {
+    document.getElementById(id).classList.add('hidden');
+    // reset quiz inputs and messages when closing
+    if(id === 'modalQuiz') {
+      document.getElementById('quizAnswer').value = '';
+      document.getElementById('quizResult').textContent = '';
+    }
+  }
+
+  // Quiz logic
+  function checkQuizAnswer() {
+    const answer = document.getElementById('quizAnswer').value.trim().toLowerCase();
+    const result = document.getElementById('quizResult');
+    if(answer.includes('chocolate')) {
+      result.textContent = "Correct! You know me so well ❤️";
+      result.style.color = 'green';
+    } else {
+      result.textContent = "Oops! Not quite, but that's okay. I love you anyway! 💕";
+      result.style.color = 'red';
+    }
+  }
+
+  // Memory logic
+ const memories = [
+  { img: "memory1.jpg", text: "Sec Boy and Zebra Girl - so cute!" },
+  { img: "memory2.jpg", text: "My fave pic of us! - so expensive haha." },
+  { img: "memory3.jpg", text: "Another fave pic of us hihi - we're so bagay talaga. " },
+  { img: "memory4.jpg", text: "Half faces para sa magka-other half hehe." }
+];
+
+
+  function showRandomMemory() {
+    const randomMemory = memories[Math.floor(Math.random() * memories.length)];
+    document.getElementById('memoryImg').src = randomMemory.img;
+    document.getElementById('memoryText').textContent = randomMemory.text;
+  }
+  // Show one memory initially when modal opens
+  document.getElementById('modalMemory').addEventListener('transitionstart', () => {
+    showRandomMemory();
+  });
+
+  // Optional: Show a random memory when modal opens
+  document.querySelectorAll('[onclick*="modalMemory"]').forEach(el => {
+    el.addEventListener('click', () => {
+      showRandomMemory();
+    });
+  });
+
+    
+  </script>
+</body>
+</html>
