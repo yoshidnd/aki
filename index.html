@@ -101,6 +101,13 @@
       }
     }
 
+    @media (max-width: 640px) {
+    #heartBtn {
+      top: 1.5rem !important;
+      font-size: 2.5rem !important;
+    }
+  }
+
 
     /* Handwritten Love Note */
     #loveNote {
@@ -157,9 +164,10 @@
 
 
   <!-- Surprise Heart Button -->
-  <button id="heartBtn" onclick="surpriseMe()" class="fixed top-4 right-4 z-50 text-red-500 text-3xl hover:scale-125 transition-transform duration-300">
-    <i class="fas fa-heart"></i>
-  </button>
+<button id="heartBtn" onclick="surpriseMe()" class="fixed top-5 left-1/2 transform -translate-x-1/2 z-50 text-red-500 text-4xl sm:text-3xl hover:scale-125 transition-transform duration-300">
+  <i class="fas fa-heart"></i>
+</button>
+
 
 
   <!-- Surprise Message -->
