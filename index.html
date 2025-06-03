@@ -161,12 +161,6 @@
   </style>
 </head>
 <body class="relative overflow-x-hidden">
-  <!-- Surprise Heart Button -->
-<button id="heartBtn" onclick="surpriseMe()" 
-  class="fixed top-6 right-6 z-50 text-red-500 text-4xl hover:scale-125 transition-transform duration-300">
-  ❤️
-</button>
-
 
   <!-- Surprise Message -->
   <div id="surpriseMessage" class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white shadow-lg p-6 rounded-xl text-center z-40">
@@ -198,13 +192,19 @@
   
 
   <!-- Header -->
-  <header class="text-center py-10" data-aos="fade-down">
-    <div class="flex justify-center mb-6">
-      <img src="pilo.jpg" alt="Profile Picture" class="w-48 h-48 rounded-full border-4 border-sky-400 shadow-md object-cover">
-    </div>
-    <h1 class="text-5xl font-bold text-sky-600">Jhales</h1>
-    <p class="text-xl mt-3">Web Developer | Critical Thinker | Sofia's Aki</p>
-  </header>
+ <!-- Header -->
+<header class="text-center py-10" data-aos="fade-down">
+  <div class="relative inline-block mb-6">
+    <img src="pilo.jpg" alt="Profile Picture" class="w-48 h-48 rounded-full border-4 border-sky-400 shadow-md object-cover">
+    <button id="heartBtn" onclick="surpriseMe()" 
+      class="absolute top-0 right-0 bg-white rounded-full p-1 text-red-500 text-2xl hover:scale-125 transition-transform duration-300 shadow-md z-10">
+      ❤️
+    </button>
+  </div>
+  <h1 class="text-5xl font-bold text-sky-600">Jhales</h1>
+  <p class="text-xl mt-3">Web Developer | Critical Thinker | Sofia's Aki</p>
+</header>
+
 
   <!-- About -->
   <section class="max-w-3xl mx-auto px-4 py-10" data-aos="fade-up">
